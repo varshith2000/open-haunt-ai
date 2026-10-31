@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --phosphor: #7dffa8;
+  --phosphor-dim: #35b96b;
+  --marigold: #ffab3d;
+  --candle: #ffd166;
+  --void: #04070a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--void);
+  color: var(--phosphor);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRT scanline veil */
+.scanlines::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.18) 0px,
+    rgba(0, 0, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.7;
+}
+
+/* soft screen vignette */
+.vignette::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 41;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.crt-glow {
+  text-shadow:
+    0 0 6px rgba(125, 255, 168, 0.45),
+    0 0 18px rgba(125, 255, 168, 0.18);
+}
+
+.marigold-glow {
+  text-shadow:
+    0 0 8px rgba(255, 171, 61, 0.55),
+    0 0 22px rgba(255, 171, 61, 0.22);
+}
+
+@keyframes gitm-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.86;
+  }
+  94% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.93;
+  }
+  98% {
+    opacity: 1;
+  }
+}
+
+.flicker {
+  animation: gitm-flicker 7s linear infinite;
+}
+
+@keyframes gitm-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: gitm-blink 1.05s steps(1) infinite;
+}
+
+/* terminal scrollbar */
+.terminal-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(125, 255, 168, 0.25);
+  border-radius: 6px;
+}
+.terminal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flicker,
+  .caret {
+    animation: none;
+  }
+}
