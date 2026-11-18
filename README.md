@@ -1,4 +1,4 @@
-# 🕯 Ghost in the Machine
+# 🕯  Ghost in the Machine
 
 **A haunted shell where an open-weight model running entirely on your machine whispers eerie commentary on every command you type.**
 
